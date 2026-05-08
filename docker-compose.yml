@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+  api:
+    image: python:3.11-slim
+    working_dir: /app
+    volumes:
+      - ./services/api:/app
+    command: bash -lc "pip install -r requirements.txt && uvicorn app.main:app --host 0.0.0.0 --port 8000"
+    ports: ["8000:8000"]
+  frontend:
+    image: node:20
+    working_dir: /app
+    volumes:
+      - ./apps/frontend:/app
+    command: bash -lc "npm install && npm run dev -- --host 0.0.0.0 --port 5173"
+    ports: ["5173:5173"]
+  sqlite:
+    image: nouchka/sqlite3
+    command: tail -f /dev/null
+    volumes:
+      - ./_workspace/temp:/data
