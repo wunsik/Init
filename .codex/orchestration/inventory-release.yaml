@@ -1,0 +1,22 @@
+name: inventory-release
+version: 1
+stages:
+  - id: design
+    agent: backend-engineer
+    skill: create-fastapi-endpoint
+    outputs: ["route", "contract-update"]
+  - id: frontend
+    needs: [design]
+    agent: frontend-engineer
+    skill: build-react-page
+    outputs: ["page", "ui-tests"]
+  - id: qa-gate
+    needs: [design, frontend]
+    agent: qa-engineer
+    skill: write-unit-tests
+    review_gate: required
+  - id: deploy
+    needs: [qa-gate]
+    agent: devops-engineer
+    skill: deploy-to-aws
+    environment: staging

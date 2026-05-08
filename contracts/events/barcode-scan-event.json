@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BarcodeScanEvent",
+  "type": "object",
+  "required": ["scan_id", "barcode", "sku", "scanned_at", "station"],
+  "properties": {
+    "scan_id": {"type": "string"},
+    "barcode": {"type": "string"},
+    "sku": {"type": "string"},
+    "station": {"type": "string"},
+    "scanned_at": {"type": "string", "format": "date-time"}
+  }
+}

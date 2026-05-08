@@ -1,0 +1,11 @@
+workflow: multi-agent-inventory
+sequence:
+  - step: design_api
+    agent: backend-engineer
+  - step: build_ui
+    agent: frontend-engineer
+  - step: qa_review
+    agent: qa-engineer
+    gate: must_pass
+  - step: deploy_staging
+    agent: devops-engineer
